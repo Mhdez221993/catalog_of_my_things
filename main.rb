@@ -7,14 +7,11 @@ class App
   include FileHandlers
 
   def initialize
-    @books = load_books
-    @music = load_music
-    @movies = load_movies
-    @games = load_games
-    @genres = load_genres
-    @labels = load_labels
-    @authors = load_authors
-    @sources = load_sources
+    @genres = parse_genres
+    @sources = parse_sources
+    @authors = parse_authors
+    @labels = parse_labels
+    @albums = parse_albums
   end
 
   def option

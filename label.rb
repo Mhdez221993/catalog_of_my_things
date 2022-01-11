@@ -12,4 +12,17 @@ class Source
   def add_item(item)
     @items << item
   end
+
+  def to_s
+    "Title: #{@title}, Color: #{@color}"
+  end
+
+  def to_json(*args)
+    {
+      JSON.create_id => self.class.name,
+      'lable_id' => @id,
+      'title' => @title,
+      'color' => @color
+    }.to_json(*args)
+  end
 end
