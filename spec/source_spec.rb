@@ -2,7 +2,7 @@ require_relative '../source'
 
 describe Source do
   before(:each) do
-    @Source = Source.new 'libary'
+    @source = Source.new 'libary'
   end
 
   it 'Should initialize the Source class' do
@@ -10,6 +10,6 @@ describe Source do
   end
 
   it 'Checks if name attribute' do
-    expect(@Source.name).to eq 'libary'
+    expect(@source.name).to eq 'libary'
   end
 end
