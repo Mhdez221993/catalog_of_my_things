@@ -3,9 +3,11 @@
 > We created a console app that will help you to keep a record of different types of things you won: books, music albums, movies, and games..
 
 ## link to schema.sql diagram
+
 ![screenshot](mythings.png)
 
 ## Test
+
 ![Test screenshot](test.png)
 
 ## Getting Started
@@ -17,6 +19,7 @@ $ git clone https://github.com/Mhdez221993/catalog_of_my_things
 $ cd catalog_of_my_things
 $ bundle install
 ```
+
 q
 * You can run the program by typing in the command line:
 
