@@ -1,6 +1,6 @@
 # !/usr/bin/env ruby
-require_relative 'handlers'
 require_relative 'file_handlers'
+require_relative 'handlers'
 
 class App
   include Handlers
@@ -38,31 +38,31 @@ class App
   def start
     case gets.chomp
     when '1'
-      list_books
+      list_item('Book')
     when '2'
-      list_misic
+      list_item('MusicAlbum')
     when '3'
-      list_movies
+      list_item('Movie')
     when '4'
-      list_games
+      list_item('Game')
     when '5'
-      list_genres
+      list_item('Genre')
     when '6'
-      list_labels
+      list_item('Label')
     when '7'
-      list_authors
+      list_item('Author')
     when '8'
-      list_sources
+      list_item('Source')
     when '9'
-      add_book
+      @albums.push(add_book)
     when '10'
-      add_misic
+      @albums.push(add_misic_album)
     when '11'
-      add_movie
+      @albums.push(add_movie)
     when '12'
-      add_game
+      @albums.push(add_game)
     when 'q'
-      persit_date
+      persit_data
       !exit
     else
       puts 'Wrong input, please try agin'

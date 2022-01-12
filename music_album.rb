@@ -11,4 +11,15 @@ class MusicAlbum < Item
   def can_be_archived?
     super() && @on_spotify
   end
+
+  def to_s
+    "[Music Album]: on spotify #{@on_spotify}"
+  end
+
+  def to_json(*args)
+    {
+      JSON.create_id => self.class.name,
+      'on_spotify' => @on_spotify
+    }.to_json(*args)
+  end
 end
