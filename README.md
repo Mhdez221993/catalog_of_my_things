@@ -5,6 +5,9 @@
 ## link to schema.sql diagram
 ![screenshot](mythings.png)
 
+## Test
+![Test screenshot](test.png)
+
 ## Getting Started
 
 * To get a local copy open your terminal and run the following commands:
