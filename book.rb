@@ -14,7 +14,7 @@ class Book < Item
   # rubocop:enable Metrics/ParameterLists
 
   def can_be_archived?
-    super && (cover_stateinclude? 'bad')
+    super or (cover_state.include? 'bad')
   end
 
   def to_s
