@@ -2,8 +2,8 @@ class Label
   attr_accessor :id
   attr_reader :title, :color, :items
 
-  def initialize(title = 'Unknown', color = 'Unknown', id = number)
-    @id = id or Random.rand(1...1000)
+  def initialize(title = 'Unknown', color = 'Unknown', id = Random.rand(1...1000))
+    @id = id
     @title = title
     @color = color
     @items = []

@@ -3,17 +3,19 @@ require_relative 'item'
 class Movie < Item
   attr_reader :silent
 
+  # rubocop:disable Metrics/ParameterLists
   def initialize(genre, author, source, label, publish_date, silent)
     super(genre, author, source, label, publish_date)
     @silent = silent
   end
+  # rubocop:enable Metrics/ParameterLists
 
   def can_be_archived?
     super or silent
   end
 
   def to_s
-    "[Movie]: silent #{@silent}"
+    "[Movie]: #{super}"
   end
 
   def to_json(*args)

@@ -2,8 +2,8 @@ class Author
   attr_accessor :id
   attr_reader :first_name, :last_name, :items
 
-  def initialize(first_name = 'Unknown', last_name = 'Unknown', id = number)
-    @id = id or Random.rand(1...100)
+  def initialize(first_name = 'Unknown', last_name = 'Unknown', id = Random.rand(1...100))
+    @id = id
     @first_name = first_name
     @last_name = last_name
     @items = []
