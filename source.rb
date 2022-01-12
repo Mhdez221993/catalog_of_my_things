@@ -2,7 +2,7 @@ class Source
   attr_accessor :id
   attr_reader :name
 
-  def initialize(name)
+  def initialize(name = 'Unknown')
     @id = Random.rand(1...0)
     @name = name
     @items = []
@@ -10,5 +10,21 @@ class Source
 
   def add_item(item)
     @items << item
+  end
+
+  def to_s
+    "[Source]: #{@name}"
+  end
+
+  def to_json(*args)
+    {
+      JSON.create_id => self.class.name,
+      'source_id' => @id,
+      'name' => @name
+    }.to_json(*args)
+  end
+
+  def self.json_create(object)
+    new(object['name'])
   end
 end

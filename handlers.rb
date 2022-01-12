@@ -1,11 +1,38 @@
-require_relative 'file_handlers'
-require_relative 'book'
-require_relative 'music_albu'
-
 module Handlers
-  include FileHandlers
-  def list_item(name)
-    @albums.each { |album| puts album if album.instance_of?(name) }
+  def list_item(my_items, my_class)
+    my_items.each { |item| puts item if item.instance_of?(my_class) }
+  end
+
+  def add_genre
+    puts "Lets's add a genre"
+    print 'Name: '
+    name = gets.chomp
+    Genre.new(name)
+  end
+
+  def add_source
+    puts "Lets's add a source"
+    print 'Name: '
+    name = gets.chomp
+    Source.new(name)
+  end
+
+  def add_author
+    puts "Lets's add an author"
+    print 'First name: '
+    first_name = gets.chomp
+    print 'Last name: '
+    last_name = gets.chomp
+    Author.new(first_name, last_name)
+  end
+
+  def add_label
+    puts "Lets's add a label"
+    print 'Title: '
+    title = gets.chomp
+    print 'Color: '
+    color = gets.chomp
+    Label.new(title, color)
   end
 
   def add_book

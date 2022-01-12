@@ -83,7 +83,7 @@ module FileHandlers
     end
   end
 
-  def persit_date
+  def persit_data
     open('genres.json', 'w') { |f| f.write JSON.generate(@genres) } unless @genres.empty?
     open('labels.json', 'w') { |f| f.write JSON.generate(@labels) } unless @labels.empty?
     open('authors.json', 'w') { |f| f.write JSON.generate(@authors) } unless @authors.empty?

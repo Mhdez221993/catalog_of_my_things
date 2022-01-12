@@ -1,4 +1,4 @@
-class Source
+class Label
   attr_accessor :id
   attr_reader :title, :color
 
@@ -14,7 +14,7 @@ class Source
   end
 
   def to_s
-    "Title: #{@title}, Color: #{@color}"
+    "[Label]: Title #{@title}, Color #{@color}"
   end
 
   def to_json(*args)
@@ -24,5 +24,9 @@ class Source
       'title' => @title,
       'color' => @color
     }.to_json(*args)
+  end
+
+  def self.json_create(object)
+    new(object['title'], object['color'])
   end
 end
