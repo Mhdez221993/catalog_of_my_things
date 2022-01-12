@@ -94,7 +94,7 @@ class App
       persit_data
       !exit
     else
-      puts 'Wrong input, please try agin'
+      puts 'Wrong input, please try again'
       start
     end
   end

@@ -62,7 +62,7 @@ module Handlers
   end
 
   def add_misic_album
-    print 'Is this album in spotify [Y/N]: '
+    print 'Is this album on spotify [Y/N]: '
     on_spotify = gets.chomp == 'y'
     print 'Date: '
     publish_date = gets.chomp
