@@ -1,53 +1,92 @@
 module Handlers
-  def list_books
-    @books.each { |book| puts book }
+  def list_item(my_items, my_class)
+    my_items.each { |item| puts item if item.instance_of?(my_class) }
   end
 
-  def list_misic
-    @music.each { |music| puts music }
+  def add_genre
+    puts "Lets's add a genre"
+    print 'Name: '
+    name = gets.chomp
+    Genre.new(name)
   end
 
-  def list_movies
-    @movies.each { |movie| puts movie }
+  def add_source
+    puts "Lets's add a source"
+    print 'Name: '
+    name = gets.chomp
+    Source.new(name)
   end
 
-  def list_games
-    @games.each { |game| puts game }
+  def add_author
+    puts "Lets's add an author"
+    print 'First name: '
+    first_name = gets.chomp
+    print 'Last name: '
+    last_name = gets.chomp
+    Author.new(first_name, last_name)
   end
 
-  def list_genres
-    @genres.each { |genre| puts genre }
+  def add_label
+    puts "Lets's add a label"
+    print 'Title: '
+    title = gets.chomp
+    print 'Color: '
+    color = gets.chomp
+    Label.new(title, color)
   end
 
-  def list_labels
-    @labels.each { |label| puts label }
+  def select_items(items, name)
+    puts "Please select a #{name} by number"
+    items.each_with_index { |item, i| puts "#{i}) #{item}" }
+    items[gets.chomp.to_i]
   end
 
-  def list_authors
-    @authors.each { |author| puts author }
-  end
-
-  def list_sources
-    @sources.each { |source| puts source }
+  def create_item
+    genre = select_items(@genres, 'genre')
+    author = select_items(@authors, 'author')
+    source = select_items(@sources, 'source')
+    label = select_items(@labels, 'label')
+    [genre, author, source, label]
   end
 
   def add_book
-    puts 'Hi there'
+    puts "Let's add a book"
+    print 'Publisher: '
+    publisher = gets.chomp
+    print 'Cover state [good/bad]: '
+    cover_state = gets.chomp
+    print 'Date: '
+    publish_date = gets.chomp
+    items = create_item
+    Book.new(*items, publish_date, publisher, cover_state)
   end
 
-  def add_misic
-    puts 'Hi there'
+  def add_misic_album
+    print 'Is this album in spotify [Y/N]: '
+    on_spotify = gets.chomp == 'y'
+    print 'Date: '
+    publish_date = gets.chomp
+    items = create_item
+    MusicAlbum.new(*items, publish_date, on_spotify)
   end
 
   def add_movie
-    puts 'Hi there'
+    print 'Is silent [y/n]: '
+    silent = gets.chomp == 'y'
+    print 'Date: '
+    publish_date = gets.chomp
+    items = create_item
+    Movie.new(*items, publish_date, silent)
   end
 
   def add_game
-    puts 'Hi there'
-  end
-
-  def persit_date
-    puts 'Hi there'
+    print 'Is a multiplayer game [y/n]: '
+    multiplayer = gets.chomp == 'y'
+    print 'Last played at: '
+    last_play_at = gets.chomp
+    print 'Date: '
+    publish_date = gets.chomp
+    items = create_item
+    Game.new(*items, publish_date, multiplayer, last_play_at)
   end
 end

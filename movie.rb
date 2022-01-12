@@ -1,21 +1,21 @@
 require_relative 'item'
 
-class MusicAlbum < Item
-  attr_reader :on_spotify
+class Movie < Item
+  attr_reader :silent
 
   # rubocop:disable Metrics/ParameterLists
-  def initialize(genre, author, source, label, publish_date, on_spotify)
+  def initialize(genre, author, source, label, publish_date, silent)
     super(genre, author, source, label, publish_date)
-    @on_spotify = on_spotify
+    @silent = silent
   end
   # rubocop:enable Metrics/ParameterLists
 
   def can_be_archived?
-    super() && @on_spotify
+    super or silent
   end
 
   def to_s
-    "[Music Album]: #{super}"
+    "[Movie]: #{super}"
   end
 
   def to_json(*args)
@@ -26,7 +26,7 @@ class MusicAlbum < Item
       'author' => @author.id,
       'source' => @source.id,
       'label' => @label.id,
-      'on_spotify' => @on_spotify
+      'silent' => @silent
     }.to_json(*args)
   end
 end
