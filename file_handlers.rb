@@ -1,8 +1,10 @@
+require 'json'
+
 module FileHandlers
   def parse_genres
     file = 'genres.json'
     if File.exist? file
-      JSON.parse(File.read(file), create_addition: true)
+      JSON.parse(File.read(file), create_additions: true)
     else
       []
     end
@@ -11,7 +13,7 @@ module FileHandlers
   def parse_sources
     file = 'sources.json'
     if File.exist? file
-      JSON.parse(File.read(file), create_addition: true)
+      JSON.parse(File.read(file), create_additions: true)
     else
       []
     end
@@ -20,7 +22,7 @@ module FileHandlers
   def parse_authors
     file = 'authors.json'
     if File.exist? file
-      JSON.parse(File.read(file), create_addition: true)
+      JSON.parse(File.read(file), create_additions: true)
     else
       []
     end
@@ -29,42 +31,54 @@ module FileHandlers
   def parse_labels
     file = 'labels.json'
     if File.exist? file
-      JSON.parse(File.read(file), create_addition: true)
+      JSON.parse(File.read(file), create_additions: true)
     else
       []
     end
   end
 
+  def find_items_by_id(my_class, id)
+    my_class.each { |genre| return genre if genre.id == id }
+  end
+
   def find_items(album)
-    genre = @genres.each { |genre| return genre if genre.id == album['genre_id'] }
-    author = @authors.each { |author| return author if author.id == album['author_id'] }
-    source = @sources.each { |source| return source if source.id == album['source_id'] }
-    label = @labels.each { |label| return label if label.id == album['label_id'] }
+    genre = find_items_by_id(@genres, album['genre'])
+    author = find_items_by_id(@authors, album['author'])
+    source = find_items_by_id(@sources, album['source'])
+    label = find_items_by_id(@labels, album['label'])
     [genre, author, source, label]
   end
 
   def parse_book_album(album)
     result = find_items(album)
-    Book.new(*result, album['publish_date'])
+    book = Book.new(*result, album['publish_date'], album['publisher'], album['cover_state'])
+    book.id = album['id']
+    book
   end
 
-  def parse_misic_album(_album)
+  def parse_misic_album(album)
     result = find_items(album)
-    MusicAlbum.new(*result, album['publish_date'])
+    music_album = MusicAlbum.new(*result, album['publish_date'], album['on_spotify'])
+    music_album.id = album['id']
+    music_album
   end
 
-  def parse_movie_album(_album)
+  def parse_movie_album(album)
     result = find_items(album)
-    Movie.new(*result, album['publish_date'])
+    movie = Movie.new(*result, album['publish_date'], album['silent'])
+    movie.id = album['id']
+    movie
   end
 
-  def parse_game_album(_album)
+  def parse_game_album(album)
     result = find_items(album)
-    Game.new(*result, album['publish_date'])
+    game = Game.new(*result, album['publish_date'], album['multiplayer'], album['last_play_at'])
+    game.id = album['id']
+    game
   end
 
   def parse_albums
-    file = 'misic_album.json'
+    file = 'albums.json'
     if File.exist? file
       JSON.parse(File.read(file)).map do |album|
         case album['json_class']

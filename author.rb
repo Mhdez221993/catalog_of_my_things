@@ -1,9 +1,9 @@
 class Author
   attr_accessor :id
-  attr_reader :first_name, :last_name
+  attr_reader :first_name, :last_name, :items
 
-  def initialize(first_name = 'Unknown', last_name = 'Unknown')
-    @id = Random.rand(1...100)
+  def initialize(first_name = 'Unknown', last_name = 'Unknown', id = number)
+    @id = id or Random.rand(1...100)
     @first_name = first_name
     @last_name = last_name
     @items = []
@@ -22,11 +22,11 @@ class Author
       JSON.create_id => self.class.name,
       'author_id' => @id,
       'first_name' => @first_name,
-      'last_name' => @first_namel
+      'last_name' => @last_name
     }.to_json(*args)
   end
 
   def self.json_create(object)
-    new(object['first_name'], object['last_name'])
+    new(object['first_name'], object['last_name'], object['author_id'])
   end
 end

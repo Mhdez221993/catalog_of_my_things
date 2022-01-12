@@ -1,26 +1,34 @@
 require_relative 'item'
 
 class Book < Item
+  attr_accessor :id
   attr_reader :publisher, :cover_state
 
   def initialize(genre, author, source, label, publish_date, publisher, cover_state)
     super(genre, author, source, label, publish_date)
     @publisher = publisher
     @cover_state = cover_state
+    @publish_date = publish_date
   end
 
   def can_be_archived?
-    ''
+    super && (cover_stateinclude? 'bad')
   end
 
   def to_s
-    "[Book]: publisher #{@publisher}, cover state #{@cover_state}"
+    "[Book]: #{super}"
   end
 
   def to_json(*args)
     {
       JSON.create_id => self.class.name,
-      'publishere' => @publisher,
+      'id' => id,
+      'genre' => @genre.id,
+      'author' => @author.id,
+      'source' => @source.id,
+      'label' => @label.id,
+      'publish_date' => @publish_date,
+      'publisher' => @publisher,
       'cover_state' => @cover_state
     }.to_json(*args)
   end

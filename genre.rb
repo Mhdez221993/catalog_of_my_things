@@ -1,9 +1,9 @@
 class Genre
   attr_accessor :id
-  attr_reader :name
+  attr_reader :name, :items
 
-  def initialize(name = 'Unknown')
-    @id = Random.rand(1...1000)
+  def initialize(name = 'Unknown', id = number)
+    @id = id or Random.rand(1...1000)
     @name = name
     @items = []
   end
@@ -25,6 +25,6 @@ class Genre
   end
 
   def self.json_create(object)
-    new(object['name'])
+    new(object['name'], object['genre_id'])
   end
 end

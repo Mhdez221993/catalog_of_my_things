@@ -52,20 +52,28 @@ class App
     case gets.chomp
     when '1'
       list_item(@albums, Book)
+      puts "\n"
     when '2'
       list_item(@albums, MusicAlbum)
+      puts "\n"
     when '3'
       list_item(@albums, Movie)
+      puts "\n"
     when '4'
       list_item(@albums, Game)
+      puts "\n"
     when '5'
       list_item(@genres, Genre)
+      puts "\n"
     when '6'
       list_item(@labels, Label)
+      puts "\n"
     when '7'
       list_item(@authors, Author)
+      puts "\n"
     when '8'
       list_item(@sources, Source)
+      puts "\n"
     when '9'
       @albums.push(add_book)
     when '10'

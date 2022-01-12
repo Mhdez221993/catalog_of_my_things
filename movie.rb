@@ -9,7 +9,7 @@ class Movie < Item
   end
 
   def can_be_archived?
-    ''
+    super or silent
   end
 
   def to_s
@@ -19,6 +19,11 @@ class Movie < Item
   def to_json(*args)
     {
       JSON.create_id => self.class.name,
+      'id' => id,
+      'genre' => @genre.id,
+      'author' => @author.id,
+      'source' => @source.id,
+      'label' => @label.id,
       'silent' => @silent
     }.to_json(*args)
   end
