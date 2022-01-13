@@ -11,5 +11,11 @@ describe MusicAlbum do
     expect(@music_album).to be_instance_of(MusicAlbum)
   end
 
-  
+  it 'Checks if publish_date attribute' do
+    expect(@music_album.publish_date).to eq '1/12/2010'
+  end
+
+  it 'Check if can be achieved' do
+    expect(@music_album.can_be_archived?).to be true
+  end
 end
