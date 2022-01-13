@@ -1,24 +1,21 @@
 require_relative 'item'
 
-class Book < Item
-  attr_accessor :id
-  attr_reader :publisher, :cover_state
+class Movie < Item
+  attr_reader :silent
 
   # rubocop:disable Metrics/ParameterLists
-  def initialize(genre, author, source, label, publish_date, publisher, cover_state)
+  def initialize(genre, author, source, label, publish_date, silent)
     super(genre, author, source, label, publish_date)
-    @publisher = publisher
-    @cover_state = cover_state
-    @publish_date = publish_date
+    @silent = silent
   end
   # rubocop:enable Metrics/ParameterLists
 
   def can_be_archived?
-    super or (cover_state.include? 'bad')
+    super or silent
   end
 
   def to_s
-    "[Book]: #{super}"
+    "[Movie]: #{super}"
   end
 
   def to_json(*args)
@@ -29,9 +26,7 @@ class Book < Item
       'author' => @author.id,
       'source' => @source.id,
       'label' => @label.id,
-      'publish_date' => @publish_date,
-      'publisher' => @publisher,
-      'cover_state' => @cover_state
+      'silent' => @silent
     }.to_json(*args)
   end
 end

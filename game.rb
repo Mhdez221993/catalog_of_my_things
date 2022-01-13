@@ -1,24 +1,24 @@
 require_relative 'item'
 
-class Book < Item
-  attr_accessor :id
-  attr_reader :publisher, :cover_state
+class Game < Item
+  attr_reader :silet, :last_play_at
 
   # rubocop:disable Metrics/ParameterLists
-  def initialize(genre, author, source, label, publish_date, publisher, cover_state)
+  def initialize(genre, author, source, label, publish_date, multiplayer, last_play_at)
     super(genre, author, source, label, publish_date)
-    @publisher = publisher
-    @cover_state = cover_state
-    @publish_date = publish_date
+    @multiplayer = multiplayer
+    @last_play_at = last_play_at
   end
   # rubocop:enable Metrics/ParameterLists
 
   def can_be_archived?
-    super or (cover_state.include? 'bad')
+    now = DateTime.now.next_year(-2).to_time
+    oldate = Date.parse(@last_play_at).to_time
+    super() && (now >= oldate)
   end
 
   def to_s
-    "[Book]: #{super}"
+    "[Game]: #{super}"
   end
 
   def to_json(*args)
@@ -29,9 +29,8 @@ class Book < Item
       'author' => @author.id,
       'source' => @source.id,
       'label' => @label.id,
-      'publish_date' => @publish_date,
-      'publisher' => @publisher,
-      'cover_state' => @cover_state
+      'multiplayer' => @multiplayer,
+      'last_play_at' => @last_play_at
     }.to_json(*args)
   end
 end
