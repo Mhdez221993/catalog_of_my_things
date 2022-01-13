@@ -47,3 +47,12 @@ CREATE TABLE item (
     FOREIGN KEY (source_id)
       REFERENCES label(id)
 );
+CREATE TABLE music_album (
+  id INT GENERATED ALWAYS AS IDENTITY,
+  name VARCHAR(120),
+  on_spotify VARCHAR(120),
+  PRIMARY KEY (id),
+  CONSTRAINT id
+    FOREIGN KEY (id)
+      REFERENCES item(id)
+);
