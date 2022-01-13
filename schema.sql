@@ -26,6 +26,24 @@ CREATE TABLE book (
   PRIMARY KEY (id),
   CONSTRAINT id
     FOREIGN KEY (id)
-      REFERENCES item(id
+      REFERENCES item(id)
 );
 
+CREATE TABLE item (
+  id INT GENERATED ALWAYS AS IDENTITY,
+  author_id INT,
+  lable_id INT,
+  source_id INT,
+  publish_date DATE,
+  archived BOOLEAN,
+  PRIMARY KEY (id),
+  CONSTRAINT author_id
+    FOREIGN KEY (author_id)
+      REFERENCES Author(id),
+  CONSTRAINT lable_id
+    FOREIGN KEY (lable_id)
+      REFERENCES source(id),
+  CONSTRAINT source_id
+    FOREIGN KEY (source_id)
+      REFERENCES label(id)
+);
