@@ -21,5 +21,16 @@ class Game < Item
     "[Game]: #{super}"
   end
 
-  
+  def to_json(*args)
+    {
+      JSON.create_id => self.class.name,
+      'id' => id,
+      'genre' => @genre.id,
+      'author' => @author.id,
+      'source' => @source.id,
+      'label' => @label.id,
+      'multiplayer' => @multiplayer,
+      'last_play_at' => @last_play_at
+    }.to_json(*args)
+  end
 end
