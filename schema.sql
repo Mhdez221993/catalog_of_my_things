@@ -26,6 +26,6 @@ CREATE TABLE book (
   PRIMARY KEY (id),
   CONSTRAINT id
     FOREIGN KEY (id)
-      REFERENCES item(id)
+      REFERENCES item(id
 );
 
