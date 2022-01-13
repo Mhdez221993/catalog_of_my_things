@@ -11,4 +11,15 @@ class Game < Item
   end
   # rubocop:enable Metrics/ParameterLists
 
- 
+  def can_be_archived?
+    now = DateTime.now.next_year(-2).to_time
+    oldate = Date.parse(@last_play_at).to_time
+    super() && (now >= oldate)
+  end
+
+  def to_s
+    "[Game]: #{super}"
+  end
+
+  
+end
